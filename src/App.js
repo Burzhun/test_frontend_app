@@ -1,25 +1,21 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import LeftPanel from './LeftPanel';
+import RightPanel from './RightPanel';
 import './App.css';
 
-function App() {
+export default function App() {
+  const [refreshToken, setRefreshToken] = useState(0);
+  const triggerRefresh = () => setRefreshToken((t) => t + 1);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="app">
+      <header className="app-header">
+        <h1>Item Selector</h1>
       </header>
+      <div className="panels">
+        <LeftPanel onSelect={triggerRefresh} />
+        <RightPanel refreshToken={refreshToken} onDeselect={triggerRefresh} />
+      </div>
     </div>
   );
 }
-
-export default App;
