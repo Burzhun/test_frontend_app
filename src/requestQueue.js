@@ -38,7 +38,7 @@ async function flushBatch() {
   if (!entries.length) return;
 
   try {
-    await fetch('/api/items', {
+    await fetch(process.env.REACT_APP_SERVER_HOST + '/api/items', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ entries }),
